@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -16,8 +17,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
+        auth.inMemoryAuthentication().withUser(User.withUsername("ADMIN").password("ADMIN").roles("ADMIN"))
+                .withUser(User.withUsername("USER").password("USER").roles("USER"));
     }
 
     @Override
@@ -51,8 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/hello").access("hasRole('ADMIN')")
-                .antMatchers("/hello").access("hasRole('USER')")
+                .antMatchers("/hello").hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated();
     }
 
