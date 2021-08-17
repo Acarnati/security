@@ -21,8 +21,8 @@ public class UserDAOImp implements UserDAO {
 
     @Override
     public int saveUser() {
-        Role role1 = new Role("ROLE_ADMIN");
-        Role role2 = new Role("ROLE_USER");
+        Role role1 = new Role("ADMIN");
+        Role role2 = new Role("USER");
         Set<Role> roles = new HashSet<>();
         roles.add(role1);
         roles.add(role2);
@@ -46,5 +46,25 @@ public class UserDAOImp implements UserDAO {
                 .createQuery("select u from User u where u.name = :username", User.class)
                 .setParameter("username", username)
                 .getSingleResult();
+    }
+
+    @Override
+    public void createUser(User user) {
+        entityManager.persist(user);
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        entityManager.createQuery("delete from User where id=: id").setParameter("id", id).executeUpdate();
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 }

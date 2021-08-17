@@ -57,7 +57,8 @@
             <th>Last name</th>
             <th>Age</th>
             <th>E-mail</th>
-<!--            <th>Редактировать</th>-->
+            <th>Удалить</th>
+            <th>Редактировать</th>
         </tr>
 
         <tr th:each="user, state : ${users}"
@@ -68,25 +69,25 @@
             <td th:utext="${user.lastName}">Last name</td>
             <td th:utext="${user.age}">Age</td>
             <td th:utext="${user.email}">E-mail</td>
-<!--            <td>-->
-<!--                <form th:action="@{users/delete(id=${user.id})}" th:object="${user}">-->
-<!--                    <input type="hidden" name="id" th:value="${user.id}">-->
-<!--                    <button type="submit">Удалить</button>-->
-<!--                </form>-->
-<!--            </td>-->
-<!--            <td>-->
-<!--                <form th:action="@{users/update(id=${user.id})}" th:object="${user}">-->
-<!--                    <input type="hidden" name="id" th:value="${user.id}">-->
-<!--                    <button type="submit">Редактировать</button>-->
-<!--                </form>-->
-<!--            </td>-->
+            <td>
+                <form th:action="@{users/delete(id=${user.id})}" th:object="${user}">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{users/update(id=${user.id})}" th:object="${user}">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <button type="submit">Редактировать</button>
+                </form>
+            </td>
 
         </tr>
 
     </table>
-<!--    <form th:action="@{users/add}">-->
-<!--        <button type="submit" style="text-align: center;">Добавить нового пользователя</button>-->
-<!--    </form>-->
+    <form th:action="@{users/add}">
+        <button type="submit" style="text-align: center;">Добавить нового пользователя</button>
+    </form>
 </div>
 </body>
 </html>

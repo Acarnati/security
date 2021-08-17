@@ -13,4 +13,8 @@ public interface UserService extends UserDetailsService {
     void setUserDao(UserDAO userDAO);
     int saveUser();
     List<User> getAllUser();
+    void createUser(User user);
+    void deleteUser(int id);
+    User getUserById(int id);
+    void updateUser(User user);
 }
