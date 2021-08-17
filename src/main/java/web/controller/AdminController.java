@@ -1,22 +1,29 @@
 package web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import web.model.Role;
 import web.model.User;
+import web.service.RoleService;
 import web.service.UserService;
 
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
 public class AdminController {
     private UserService userService;
+    private RoleService roleService;
     private int i = 0;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping(value = "/admin")
@@ -47,13 +54,23 @@ public class AdminController {
     }
 
     @PostMapping(value = "users/add")
-    public String addUser(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute("user") User user, @RequestParam(required=false) String roleAdmin,
+                          @RequestParam(required=false) String roleUser) {
+        Set<Role> roles = new HashSet<>();
+        if (roleAdmin != null) {
+            roles.add(roleService.getRoleByName("ADMIN"));
+        }
+        if (roleUser != null) {
+            roles.add(roleService.getRoleByName("USER"));
+        }
+        user.setRoles(roles);
         userService.createUser(user);
         return "redirect:/admin";
     }
 
     @GetMapping(value="users/delete")
     public String deleteUs(@RequestParam("id") int id) {
+        userService.deleteUser(id);
         return "redirect:/admin";
     }
 

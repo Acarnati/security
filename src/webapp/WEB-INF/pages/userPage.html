@@ -53,40 +53,29 @@
     <table>
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Last name</th>
-            <th>Age</th>
+            <th>Логин</th>
+            <th>Имя пользователя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
             <th>E-mail</th>
-            <th>Удалить</th>
-            <th>Редактировать</th>
         </tr>
 
         <tr th:each="user, state : ${users}"
             class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
 
             <td th:utext="${user.id}">Id</td>
-            <td th:utext="${user.name}">Name</td>
+            <td th:utext="${user.name}">Login</td>
+            <td th:utext="${user.firstname}">Name</td>
             <td th:utext="${user.lastName}">Last name</td>
             <td th:utext="${user.age}">Age</td>
             <td th:utext="${user.email}">E-mail</td>
-            <td>
-                <form th:action="@{users/delete(id=${user.id})}" th:object="${user}">
-                    <input type="hidden" name="id" th:value="${user.id}">
-                    <button type="submit">Удалить</button>
-                </form>
-            </td>
-            <td>
-                <form th:action="@{users/update(id=${user.id})}" th:object="${user}">
-                    <input type="hidden" name="id" th:value="${user.id}">
-                    <button type="submit">Редактировать</button>
-                </form>
-            </td>
-
         </tr>
 
     </table>
-    <form th:action="@{users/add}">
-        <button type="submit" style="text-align: center;">Добавить нового пользователя</button>
+    <br>
+    <br>
+    <form th:action="@{/logout}">
+        <button type="submit" style="text-align: center;">Logout</button>
     </form>
 </div>
 </body>

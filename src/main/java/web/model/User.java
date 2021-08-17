@@ -4,10 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +15,9 @@ public class User implements UserDetails {
 
     @Column(name = "username", unique = true)
     private String name;
+
+    @Column(name = "firstname", unique = true)
+    private String firstname;
 
     @Column(name = "lastName")
     private String lastName;
@@ -40,13 +40,16 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String lastName, byte age, String email, String password, Set<Role> roles) {
+    public User(String name, String firstname, String lastName, byte age, String email, String password, Role... roles) {
         this.name = name;
+        this.firstname = firstname;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        for (Role role : roles) {
+            this.roles.add(role);
+        }
     }
 
     public int getId() {
@@ -63,6 +66,14 @@ public class User implements UserDetails {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastName() {
@@ -143,11 +154,13 @@ public class User implements UserDetails {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id && age == user.age && name.equals(user.name)
-                && lastName.equals(user.lastName) && email.equals(user.email);
+                && firstname.equals(user.firstname)
+                && lastName.equals(user.lastName)
+                && email.equals(user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastName, age, email);
+        return Objects.hash(id, name, firstname, lastName, age, email);
     }
 }

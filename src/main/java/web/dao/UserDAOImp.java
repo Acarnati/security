@@ -23,16 +23,11 @@ public class UserDAOImp implements UserDAO {
     public int saveUser() {
         Role role1 = new Role("ADMIN");
         Role role2 = new Role("USER");
-        Set<Role> roles = new HashSet<>();
-        roles.add(role1);
-        roles.add(role2);
-        Set<Role> roles2 = new HashSet<>();
-        roles2.add(role2);
         entityManager.persist(role1);
         entityManager.persist(role2);
-        User user1 = new User("ADMIN", "Иванов", (byte) 29, "ivanov@mail.ru", "ADMIN", roles);
+        User user1 = new User("ADMIN", "Иван", "Иванов", (byte) 29, "ivanov@mail.ru", "ADMIN", role1, role2);
         entityManager.persist(user1);
-        User user2 = new User("USER", "Лапина", (byte) 35, "lapina@mail.ru", "USER", roles2);
+        User user2 = new User("USER", "Ирина", "Лапина", (byte) 35, "lapina@mail.ru", "USER", role2);
         entityManager.persist(user2);
         return 1;
     }

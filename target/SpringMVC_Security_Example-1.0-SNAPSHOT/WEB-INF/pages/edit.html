@@ -18,23 +18,6 @@
         .main {
             float: left
         }
-
-        input {
-            clear: both;
-            float: left;
-            margin: 20px auto;
-            color: #FFFFFF;
-            display: inline-block;
-            font: bold 16px arial;
-            height: 35px;
-            line-height: 35px;
-            text-align: center;
-            text-decoration: none;
-            width: 160px;
-            background: linear-gradient(to bottom, #209DCA, #0F84AF) repeat scroll 0 0 / 100% 200% rgba(0, 0, 0, 0);
-            transition: all 0.5s linear 0s;
-            border-bottom: 4px solid #ccc;
-        }
     </style>
 </head>
 <body>
@@ -42,8 +25,12 @@
 <div class="main">
     <form th:action="@{/users/add}" th:object="${user}" method="post">
         <div class="field">
-            <label th:for="name">Name</label>
+            <label th:for="name">Login</label>
             <input type="text" name="name" th:id="name" th:value="${user.getName()}">
+        </div>
+        <div class="field">
+            <label th:for="firstname">Name</label>
+            <input type="text" name="firstname" th:id="firstname" th:value="${user.getFirstname()}">
         </div>
         <div class="field">
             <label th:for="lastName">Last name</label>
@@ -57,11 +44,36 @@
             <label th:for="email">E-mail</label>
             <input type="text" name="email" th:id="email" th:value="${user.getEmail()}">
         </div>
+        <div class="field">
+            <label th:for="password">Password</label>
+            <input type="text" name="password" th:id="password" th:value="${user.getPassword()}">
+        </div>
+        <br>
+        <h5>Выбрать роли:</h5>
+        <br/>
+        <label>
+            <input type="checkbox"
+                   name="roleAdmin"
+                   th:value="ADMIN"
+                   th:text="Администратор">
+        </label>
+        <label>
+            <input type="checkbox"
+                   name="roleUser"
+                   th:value="USER"
+                   th:text="Пользователь">
+        </label>
+        <br>
         <button type="submit">Сохранить пользователя</button>
     </form>
-    <br/>
-    <form th:action="@{/}">
+    <br>
+    <form th:action="@{/admin}">
         <button type="submit" class="btn btn-outline-danger">Назад к списку пользователей</button>
+    </form>
+    <br>
+    <br>
+    <form th:action="@{/logout}">
+        <button type="submit" style="text-align: center;">Logout</button>
     </form>
 </div>
 </body>
