@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/")
 public class AdminController {
@@ -24,8 +26,8 @@ public class AdminController {
     }
 
     @GetMapping(value = "/userPage")
-    public String printWelcomeUser(ModelMap model) {
-        model.addAttribute("users", userService.getAllUser());
+    public String printWelcomeUser(ModelMap model, Principal principal) {
+        model.addAttribute("users", userService.loadUserByUsername(principal.getName()));
         return "userPage";
     }
 
