@@ -21,9 +21,6 @@ public class UserController {
 
 	@RequestMapping(value = "hello", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		if (i != 1) {
-			i = userService.saveUser();
-		}
 		List<User> user = userService.getAllUser();
 		model.addAttribute("users", user);
 		return "hello";
@@ -31,7 +28,9 @@ public class UserController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginPage() {
+		if (i != 1) {
+			i = userService.saveUser();
+		}
         return "login";
     }
-
 }

@@ -15,6 +15,10 @@ public class UserDAOImp implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
+    protected EntityManager getEntityManager() {
+        return this.entityManager;
+    }
+
     @Override
     public int saveUser() {
         Role role1 = new Role("ADMIN");
@@ -34,5 +38,13 @@ public class UserDAOImp implements UserDAO {
     @Override
     public List<User> getAllUser() {
         return entityManager.createQuery("from User").getResultList();
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return getEntityManager()
+                .createQuery("select u from User u where u.name = :username", User.class)
+                .setParameter("username", username)
+                .getSingleResult();
     }
 }
