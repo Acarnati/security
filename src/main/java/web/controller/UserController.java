@@ -15,14 +15,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class UserController {
-	@Autowired
 	private UserService userService;
 	private int i = 0;
 
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+
 	@RequestMapping(value = "hello", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		List<User> user = userService.getAllUser();
-		model.addAttribute("users", user);
+		model.addAttribute("users", userService.getAllUser());
 		return "hello";
 	}
 

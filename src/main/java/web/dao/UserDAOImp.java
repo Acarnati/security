@@ -21,8 +21,8 @@ public class UserDAOImp implements UserDAO {
 
     @Override
     public int saveUser() {
-        Role role1 = new Role("ADMIN");
-        Role role2 = new Role("USER");
+        Role role1 = new Role("ROLE_ADMIN");
+        Role role2 = new Role("ROLE_USER");
         Set<Role> roles = new HashSet<>();
         roles.add(role1);
         roles.add(role2);

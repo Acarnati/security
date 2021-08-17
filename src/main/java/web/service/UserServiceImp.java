@@ -35,10 +35,6 @@ public class UserServiceImp implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User myUser= userDAO.getUserByUsername(userName);
-        if (myUser == null) {
-            throw new UsernameNotFoundException("Unknown user: " + userName);
-        }
-        return new org.springframework.security.core.userdetails.User(myUser.getName(), myUser.getPassword(), myUser.getRoles());
+        return userDAO.getUserByUsername(userName);
     }
 }
