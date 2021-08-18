@@ -5,12 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import web.dao.UserDAO;
 import web.model.User;
 
-import javax.security.auth.login.LoginException;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -21,11 +18,6 @@ public class UserServiceImp implements UserService {
     @Autowired
     public void setUserDao(UserDAO userDAO) {
         this.userDAO = userDAO;
-    }
-
-    @Override
-    public int saveUser() {
-        return userDAO.saveUser();
     }
 
     @Override

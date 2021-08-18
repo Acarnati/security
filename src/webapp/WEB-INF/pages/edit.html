@@ -4,6 +4,10 @@
 <head>
     <title>Create user</title>
     <style>
+        body {
+            background: aquamarine;
+        }
+
         .field {
             clear: both;
             text-align: right;
@@ -17,6 +21,21 @@
 
         .main {
             float: left
+        }
+
+        button[type=submit] {
+            padding:10px 45px;
+            background: khaki;
+            border:0 none;
+            cursor:pointer;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            text-decoration-color: indigo;
+            font-size: 16px;
+        }
+
+        input[type=checkbox] {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -49,8 +68,7 @@
             <input type="text" name="password" th:id="password" th:value="${user.getPassword()}">
         </div>
         <br>
-        <h5>Выбрать роли:</h5>
-        <br/>
+        <h4>Выбрать роли:</h4>
         <label>
             <input type="checkbox"
                    name="roleAdmin"
@@ -63,6 +81,7 @@
                    th:value="USER"
                    th:text="Пользователь">
         </label>
+        <br>
         <br>
         <button type="submit">Сохранить пользователя</button>
     </form>

@@ -1,14 +1,11 @@
 package web.dao;
 
 import org.springframework.stereotype.Repository;
-import web.model.Role;
 import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class UserDAOImp implements UserDAO {
@@ -17,19 +14,6 @@ public class UserDAOImp implements UserDAO {
 
     protected EntityManager getEntityManager() {
         return this.entityManager;
-    }
-
-    @Override
-    public int saveUser() {
-        Role role1 = new Role("ADMIN");
-        Role role2 = new Role("USER");
-        entityManager.persist(role1);
-        entityManager.persist(role2);
-        User user1 = new User("ADMIN", "Иван", "Иванов", (byte) 29, "ivanov@mail.ru", "ADMIN", role1, role2);
-        entityManager.persist(user1);
-        User user2 = new User("USER", "Ирина", "Лапина", (byte) 35, "lapina@mail.ru", "USER", role2);
-        entityManager.persist(user2);
-        return 1;
     }
 
     @Override

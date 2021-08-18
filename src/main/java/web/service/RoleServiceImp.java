@@ -6,8 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import web.dao.RoleDAO;
 import web.model.Role;
 
-import java.util.List;
-
 @Service
 @Transactional
 public class RoleServiceImp implements RoleService {
@@ -16,6 +14,11 @@ public class RoleServiceImp implements RoleService {
     @Autowired
     public void setRoleRepo(RoleDAO roleDAO) {
         this.roleDAO = roleDAO;
+    }
+
+    @Override
+    public void createRole(Role role) {
+        roleDAO.createRole(role);
     }
 
     @Override

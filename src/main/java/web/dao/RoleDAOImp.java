@@ -2,6 +2,7 @@ package web.dao;
 
 import org.springframework.stereotype.Repository;
 import web.model.Role;
+import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,11 @@ public class RoleDAOImp implements RoleDAO {
 
     protected EntityManager getEntityManager() {
         return this.entityManager;
+    }
+
+    @Override
+    public void createRole(Role role) {
+        entityManager.persist(role);
     }
 
     @Override

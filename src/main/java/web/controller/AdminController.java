@@ -1,6 +1,5 @@
 package web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -19,7 +18,21 @@ import java.util.Set;
 public class AdminController {
     private UserService userService;
     private RoleService roleService;
-    private int i = 0;
+    private Integer i = 0;
+
+    public Integer saveUser() {
+        Role role1 = new Role("ADMIN");
+        Role role2 = new Role("USER");
+        roleService.createRole(role1);
+        roleService.createRole(role2);
+        User user1 = new User("ADMIN", "Иван", "Иванов", (byte) 29,
+                "ivanov@mail.ru", "ADMIN", role1, role2);
+        userService.createUser(user1);
+        User user2 = new User("USER", "Ирина", "Лапина", (byte) 35,
+                "lapina@mail.ru", "USER", role2);
+        userService.createUser(user2);
+        return 1;
+    }
 
     public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
@@ -41,7 +54,7 @@ public class AdminController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginPage() {
         if (i != 1) {
-            i = userService.saveUser();
+            i = saveUser();
         }
         return "login";
     }

@@ -4,6 +4,10 @@
 <head>
     <title>Create user</title>
     <style>
+        body {
+            background: aquamarine;
+        }
+
         .field {
             clear: both;
             text-align: right;
@@ -17,6 +21,17 @@
 
         .main {
             float: left
+        }
+
+        button[type=submit] {
+            padding:10px 45px;
+            background: khaki;
+            border:0 none;
+            cursor:pointer;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            text-decoration-color: indigo;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -49,7 +64,7 @@
         <button type="submit">Сохранить изменения</button>
     </form>
     <br/>
-    <form th:action="@{/}">
+    <form th:action="@{/admin}">
         <button type="submit">Назад к списку пользователей</button>
     </form>
     <br>
