@@ -2,14 +2,10 @@ package web.dao;
 
 import org.springframework.stereotype.Repository;
 import web.model.Role;
-import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class RoleDAOImp implements RoleDAO {
