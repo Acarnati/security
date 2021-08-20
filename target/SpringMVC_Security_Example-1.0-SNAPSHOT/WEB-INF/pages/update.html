@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Create user</title>
+    <style>
+        body {
+            background: aquamarine;
+        }
+
+        .field {
+            clear: both;
+            text-align: right;
+            line-height: 25px;
+        }
+
+        label {
+            float: left;
+            padding-right: 10px;
+        }
+
+        .main {
+            float: left
+        }
+
+        button[type=submit] {
+            padding:10px 45px;
+            background: khaki;
+            border:0 none;
+            cursor:pointer;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            text-decoration-color: indigo;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<h2>Редактировать пользователя</h2>
+<div class="main">
+    <form th:action="@{/users/update}" th:object="${user}" method="post">
+        <input type="hidden" name="id" th:value="${user.getId()}">
+        <div class="field">
+            <label th:for="name">Логин</label>
+            <input type="text" name="name" th:id="name" th:value="${user.getName()}">
+        </div>
+        <div class="field">
+            <label th:for="firstname">Имя пользователя</label>
+            <input type="text" name="firstname" th:id="firstname" th:value="${user.getFirstname()}">
+        </div>
+        <div class="field">
+            <label th:for="lastName">Фамилия</label>
+            <input type="text" name="lastName" th:id="lastName" th:value="${user.getLastName()}">
+        </div>
+        <div class="field">
+            <label th:for="age">Возраст</label>
+            <input type="text" name="age" th:id="age" th:value="${user.getAge()}">
+        </div>
+        <div class="field">
+            <label th:for="email">E-mail</label>
+            <input type="text" name="email" th:id="email" th:value="${user.getEmail()}">
+        </div>
+        <div class="field">
+            <label th:for="password">Пароль</label>
+            <input type="text" name="password" th:id="password" th:value="${user.getPassword()}">
+        </div>
+        <h4>Редактировать роли:</h4>
+        <td>
+            <th:block th:each="role: ${roles}">
+                <input type="checkbox" th:field="*{roles}"
+                       th:text="${role.role}" th:value="${role.getRole()}" class="m-2" />
+            </th:block>
+        </td>
+        <br>
+        <button type="submit">Сохранить изменения</button>
+    </form>
+    <br/>
+    <form th:action="@{/admin}">
+        <button type="submit">Назад к списку пользователей</button>
+    </form>
+    <br>
+    <br>
+    <form th:action="@{/logout}">
+        <button type="submit" style="text-align: center;">Logout</button>
+    </form>
+</div>
+</body>
+</html>

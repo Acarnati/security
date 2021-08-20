@@ -60,11 +60,15 @@
             <label th:for="email">E-mail</label>
             <input type="text" name="email" th:id="email" th:value="${user.getEmail()}">
         </div>
+        <div class="field">
+            <label th:for="password">Пароль</label>
+            <input type="text" name="password" th:id="password" th:value="${user.getPassword()}">
+        </div>
         <h4>Редактировать роли:</h4>
         <td>
             <th:block th:each="role: ${roles}">
                 <input type="checkbox" th:field="*{roles}"
-                       th:text="${role.role}" th:value="${role.role}" class="m-2" />
+                       th:text="${role.role}" th:value="${role.getRole()}" class="m-2" />
             </th:block>
         </td>
         <br>
