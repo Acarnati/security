@@ -6,7 +6,10 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class RoleDAOImp implements RoleDAO {
@@ -20,6 +23,11 @@ public class RoleDAOImp implements RoleDAO {
     @Override
     public void createRole(Role role) {
         entityManager.persist(role);
+    }
+
+    @Override
+    public List<Role> getAllRole() {
+        return entityManager.createQuery("from Role").getResultList();
     }
 
     @Override

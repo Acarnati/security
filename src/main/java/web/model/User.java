@@ -122,6 +122,14 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public ArrayList<String> getRolesUser(User user) {
+        ArrayList<String> rolesList = new ArrayList<>();
+        for(Role role: user.getRoles()) {
+            rolesList.add(role.getRole());
+        }
+        return rolesList;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();

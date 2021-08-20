@@ -2,6 +2,7 @@ package web.dao;
 
 import web.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UserDAO {
@@ -11,4 +12,5 @@ public interface UserDAO {
     void deleteUser(int id);
     User getUserById(int id);
     void updateUser(User user);
+//    ArrayList<String> getRolesUser(User user);
 }

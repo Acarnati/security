@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDAO;
 import web.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
